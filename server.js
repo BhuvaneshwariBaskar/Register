@@ -24,11 +24,18 @@ app.post("/api/register",async(req,res)=>{
         if(err){
             return console.log(err);
         }
-        return res.json("Registered",result);
+        return res.json(`${result.insertId}`);
     })
 
 })
-
+app.get("/api/register",async(req,res)=>{
+    const{id}=req.params;
+    console.log(id);
+    await db.query("select * from users_table where id=?",[id],
+    async(err,result)=>{
+        console.log(result);
+    })
+})
 app.listen(8080,()=>{
     console.log("Server running on 8080");
 })
