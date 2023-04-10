@@ -18,7 +18,7 @@ const Register = () => {
             setEmail("");
             setMobile("");
             console.log("Hey");
-            navigate("/home")
+            navigate(`/home`)
         })
         .catch((err)=>{
             console.log(err);
