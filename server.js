@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
@@ -5,7 +7,7 @@ const db = require("./database");
 
 const app = express();
 app.use(express.json());
-app.use(cors);
+app.use(cors());
 app.use(morgan("dev"));
 
 app
@@ -13,7 +15,7 @@ app
     try {
       const { fname, lname, email, mobile, address, city, state, pincode } =
         req.body;
-      const data = db.query(
+      const data = await db.query(
         "insert into practicereact2.user_table (fname,lname,email,mobile,address,city,state,pincode) values(?,?,?,?,?,?,?,?)",
         [fname, lname, email, mobile, address, city, state, pincode]
       );
@@ -27,7 +29,7 @@ app
   .get("/api/:id", async (req, res) => {
     try {
       const { id } = req.params;
-      const data = db.query(
+      const data = await db.query(
         "select * from practicereact2.user_table where id=?",
         [id]
       );
@@ -38,6 +40,9 @@ app
       return res.json(error);
     }
   });
+  app
+
+
 app.listen(8080, () => {
   console.log("server listening on 8080");
 });
