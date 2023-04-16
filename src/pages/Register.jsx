@@ -16,25 +16,24 @@ const Register = () => {
   const [pincode, setPincode] = useState("");
 
   const handleSubmit = async(e) => {
-    e.preventDefault()
-    console.log("hello");
-    await register(fname,lname,email,mobile,address,city,state,pincode).then((res)=>{
-      console.log("Hey");
-      console.log(res);
-        setAddress("");
-        setCity("");
-        setEmail("");
-        setFname("");
-        setLname("");
-        setMobile("");
-        setPincode("");
-        setState("");
-        // navigate(`/${res.data}`);
-        navigate('/home')
-    }).catch((error)=>{
-        console.log(error);
-    })
+    e.preventDefault();
+    console.log("Okay");
 
+    await register(fname,lname,email,mobile,address,city,state,pincode).then((res)=>{
+      // console.log(res);
+      setAddress("");
+      setCity("");
+      setEmail("");
+      setFname("");
+      setLname("");
+      setMobile("");
+      setPincode("");
+      setState("");
+        navigate(`/${res.data}`)
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
   };
   return (
     <section className="formsec">
@@ -42,6 +41,7 @@ const Register = () => {
         id="form"
         className="form"
         onSubmit={(e) => {
+          // console.log("Hey")
           handleSubmit(e);
         }}
       >
@@ -113,3 +113,4 @@ const Register = () => {
 };
 
 export default Register;
+
